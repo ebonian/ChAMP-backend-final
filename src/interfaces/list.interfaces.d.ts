@@ -12,4 +12,9 @@ interface IListCreateDTO {
     order: number;
 }
 
-export { IList, IListCreateDTO };
+interface IListUpdateDTO {
+    title?: string;
+    order?: number;
+}
+
+export { IList, IListCreateDTO, IListUpdateDTO };

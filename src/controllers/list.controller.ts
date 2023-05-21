@@ -25,7 +25,18 @@ const create = async (req: Request, res: Response) => {
     res.status(201).send(createdList);
 };
 
-const update = async (req: Request, res: Response) => {};
+const update = async (req: Request, res: Response) => {
+    const listId = req.params.id;
+    const listBody = res.locals.body as IListCreateDTO;
+
+    const updatedList = await listServices.update(listId, listBody);
+
+    if (!updatedList) {
+        return res.status(400).send("Error updating list");
+    }
+
+    return res.status(200).send(updatedList);
+};
 
 const move = async (req: Request, res: Response) => {};
 

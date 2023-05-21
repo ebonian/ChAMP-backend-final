@@ -14,4 +14,6 @@ router.post(
     genericRoute(listController.create)
 );
 
+router.put("/:id", genericRoute(listController.update));
+
 export default router;
