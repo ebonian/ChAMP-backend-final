@@ -79,6 +79,14 @@ const removeTaskFromList = async (
     return updatedList;
 };
 
+const remove = async (listId: ObjectId | string) => {
+    const deletedList = await ListModel.findByIdAndDelete(listId)
+        .then((list) => list)
+        .catch(() => null);
+
+    return deletedList;
+};
+
 export default {
     find,
     findById,
@@ -86,4 +94,5 @@ export default {
     update,
     addTaskToList,
     removeTaskFromList,
+    remove,
 };

@@ -2,7 +2,7 @@ import express from "express";
 import listController from "@/controllers/list.controller";
 import { genericRoute } from "@/middlewares/route.middleware";
 import { validate } from "@/utils/validator";
-import { createListSchema } from "@/schemas/list.schemas";
+import { createListSchema, updatedListSchema } from "@/schemas/list.schemas";
 
 const router = express.Router();
 
@@ -14,6 +14,12 @@ router.post(
     genericRoute(listController.create)
 );
 
-router.put("/:id", genericRoute(listController.update));
+router.put(
+    "/:id",
+    validate(updatedListSchema),
+    genericRoute(listController.update)
+);
+
+router.delete("/:id", genericRoute(listController.remove));
 
 export default router;
