@@ -53,11 +53,28 @@ const addTaskToList = async (
         }
     )
         .then((list) => list)
-        .catch((err) => {
-            console.log(err);
+        .catch((err) => null);
 
-            return null;
-        });
+    return updatedList;
+};
+
+const removeTaskFromList = async (
+    listId: ObjectId | string,
+    taskId: ObjectId | string
+) => {
+    const updatedList = await ListModel.findByIdAndUpdate(
+        listId,
+        {
+            $pull: {
+                tasks: taskId,
+            },
+        },
+        {
+            new: true,
+        }
+    )
+        .then((list) => list)
+        .catch((err) => null);
 
     return updatedList;
 };
@@ -68,4 +85,5 @@ export default {
     create,
     update,
     addTaskToList,
+    removeTaskFromList,
 };

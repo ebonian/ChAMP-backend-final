@@ -34,6 +34,8 @@ const create = async (req: Request, res: Response) => {
     );
 
     if (!updatedList) {
+        await taskServices.remove(createdTask._id);
+
         return res.status(400).send("List not found");
     }
 
@@ -55,6 +57,21 @@ const update = async (req: Request, res: Response) => {
 
 const remove = async (req: Request, res: Response) => {
     const taskId = req.params.id;
+
+    const task = await taskServices.findById(taskId);
+
+    if (!task) {
+        return res.status(404).send("Task not found");
+    }
+
+    const updatedList = await listServices.removeTaskFromList(
+        task.listId,
+        task._id
+    );
+
+    if (!updatedList) {
+        return res.status(400).send("Error removing task from list");
+    }
 
     const deletedTask = taskServices.remove(taskId);
 
