@@ -12,6 +12,8 @@ const router = express.Router();
 
 router.get("/", genericRoute(taskControllers.get));
 
+router.get("/:id", genericRoute(taskControllers.getById));
+
 router.post(
     "/",
     validate(createTaskSchema),

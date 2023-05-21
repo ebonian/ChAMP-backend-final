@@ -14,6 +14,18 @@ const get = async (req: Request, res: Response) => {
     res.status(200).send(lists);
 };
 
+const getById = async (req: Request, res: Response) => {
+    const listId = req.params.id;
+
+    const list = await listServices.findById(listId);
+
+    if (!list) {
+        return res.status(404).send("List not found");
+    }
+
+    res.status(200).send(list);
+};
+
 const create = async (req: Request, res: Response) => {
     const listBody = res.locals.body as IListCreateDTO;
 
@@ -65,6 +77,7 @@ const reorder = async (req: Request, res: Response) => {};
 
 export default {
     get,
+    getById,
     create,
     update,
     reorder,

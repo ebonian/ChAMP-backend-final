@@ -11,7 +11,23 @@ import taskServices from "@/services/task.services";
 const get = async (req: Request, res: Response) => {
     const tasks = await taskServices.find();
 
+    if (!tasks) {
+        return res.status(404).send("Task not found");
+    }
+
     res.status(200).send(tasks);
+};
+
+const getById = async (req: Request, res: Response) => {
+    const taskId = req.params.id;
+
+    const task = await taskServices.findById(taskId);
+
+    if (!task) {
+        return res.status(404).send("Task not found");
+    }
+
+    return res.status(200).send(task);
 };
 
 const create = async (req: Request, res: Response) => {
@@ -117,6 +133,7 @@ const reorder = async (req: Request, res: Response) => {};
 
 export default {
     get,
+    getById,
     create,
     update,
     remove,

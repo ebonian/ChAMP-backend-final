@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.get("/", genericRoute(listController.get));
 
+router.get("/:id", genericRoute(listController.getById));
+
 router.post(
     "/",
     validate(createListSchema),
