@@ -1,8 +1,8 @@
+import bodyParser from "body-parser";
 import express from "express";
 import mongoose from "mongoose";
 import listRoutes from "@/routes/list.routes";
 import taskRoutes from "@/routes/task.routes";
-import bodyParser from "body-parser";
 
 const app = express();
 const port = 3000;

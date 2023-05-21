@@ -1,5 +1,6 @@
-import type { Request, Response, NextFunction } from 'express';
-import Joi from 'joi';
+import type { Request, Response, NextFunction } from "express";
+
+import Joi from "joi";
 
 export const validate =
     (schema: Joi.ObjectSchema<any>) =>

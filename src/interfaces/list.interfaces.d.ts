@@ -7,9 +7,9 @@ interface IList extends Document {
     tasks: ObjectId[];
 }
 
-interface IListDTO {
+interface IListCreateDTO {
     title: string;
     order: number;
 }
 
-export { IList, IListDTO };
+export { IList, IListCreateDTO };

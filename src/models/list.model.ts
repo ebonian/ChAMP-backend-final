@@ -1,4 +1,5 @@
 import type { IList } from "@/interfaces/list.interfaces";
+
 import mongoose, { Schema } from "mongoose";
 
 const ListSchema = new Schema({

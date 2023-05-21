@@ -1,4 +1,5 @@
 import type { ITask } from "@/interfaces/task.interfaces";
+
 import mongoose, { Schema } from "mongoose";
 
 const TaskSchema = new Schema({

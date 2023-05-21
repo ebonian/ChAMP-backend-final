@@ -1,5 +1,4 @@
 import express from "express";
-
 import { genericRoute } from "@/middlewares/route.middleware";
 import taskControllers from "@/controllers/task.controllers";
 import { validate } from "@/utils/validator";
@@ -15,7 +14,7 @@ router.post(
     genericRoute(taskControllers.create)
 );
 
-router.put("/", genericRoute(taskControllers.update));
+router.put("/:id", genericRoute(taskControllers.update));
 
 router.delete("/", genericRoute(taskControllers.remove));
 

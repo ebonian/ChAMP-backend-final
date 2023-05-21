@@ -1,11 +1,12 @@
-import { IListDTO } from "@/interfaces/list.interfaces";
-import listServices from "@/services/list.services";
+import { IListCreateDTO } from "@/interfaces/list.interfaces";
 import type { Request, Response } from "express";
+
+import listServices from "@/services/list.services";
 
 const get = async (req: Request, res: Response) => {};
 
 const create = async (req: Request, res: Response) => {
-    const listBody = res.locals.body as IListDTO;
+    const listBody = res.locals.body as IListCreateDTO;
 
     const createdList = await listServices.create(listBody);
 

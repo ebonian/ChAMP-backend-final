@@ -8,11 +8,18 @@ interface ITask extends Document {
     order: number;
 }
 
-interface ITaskDTO {
+interface ITaskCreateDTO {
     description: string;
     due_date: Date;
     listId: ObjectId;
     order: number;
 }
 
-export { ITask, ITaskDTO };
+interface ITaskUpdateDTO {
+    description?: string;
+    due_date?: Date;
+    listId?: ObjectId;
+    order?: number;
+}
+
+export { ITask, ITaskCreateDTO, ITaskUpdateDTO };

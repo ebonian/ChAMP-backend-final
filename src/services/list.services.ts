@@ -1,6 +1,7 @@
-import { IList, IListDTO } from "@/interfaces/list.interfaces";
+import type { ObjectId } from "mongoose";
+import type { IList, IListCreateDTO } from "@/interfaces/list.interfaces";
+
 import ListModel from "@/models/list.model";
-import { ObjectId } from "mongoose";
 
 const find = async () => {
     const lists = await ListModel.find()
@@ -18,7 +19,7 @@ const findById = async (listId: string) => {
     return list;
 };
 
-const create = async (list: IListDTO) => {
+const create = async (list: IListCreateDTO) => {
     const newList = await ListModel.create(list)
         .then((list) => list)
         .catch(() => null);
@@ -26,7 +27,7 @@ const create = async (list: IListDTO) => {
     return newList;
 };
 
-const update = async (listId: ObjectId, list: IListDTO) => {
+const update = async (listId: ObjectId | string, list: IListCreateDTO) => {
     const updatedList = await ListModel.findByIdAndUpdate(listId, list, {
         new: true,
     })
@@ -36,7 +37,10 @@ const update = async (listId: ObjectId, list: IListDTO) => {
     return updatedList;
 };
 
-const addTaskToList = async (listId: ObjectId, taskId: ObjectId) => {
+const addTaskToList = async (
+    listId: ObjectId | string,
+    taskId: ObjectId | string
+) => {
     const updatedList = await ListModel.findByIdAndUpdate(
         listId,
         {

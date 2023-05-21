@@ -1,5 +1,4 @@
 import express from "express";
-
 import listController from "@/controllers/list.controller";
 import { genericRoute } from "@/middlewares/route.middleware";
 import { validate } from "@/utils/validator";
