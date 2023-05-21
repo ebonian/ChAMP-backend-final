@@ -1,5 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
+import listRoutes from "@/routes/list.routes";
+import bodyParser from "body-parser";
 
 const app = express();
 const port = 3000;
@@ -13,9 +15,9 @@ mongoose
         console.log(err);
     });
 
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-});
+app.use(bodyParser.json());
+
+app.use("/list", listRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
