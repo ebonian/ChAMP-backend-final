@@ -30,7 +30,12 @@ const create = async (task: ITaskCreateDTO) => {
     return createdTask;
 };
 
-const update = async (taskId: ObjectId | string, task: ITaskUpdateDTO) => {
+const update = async (
+    taskId: ObjectId | string,
+    task: ITaskUpdateDTO & {
+        listId?: ObjectId | string;
+    }
+) => {
     const updatedTask = await TaskModel.findByIdAndUpdate(taskId, task, {
         new: true,
     })

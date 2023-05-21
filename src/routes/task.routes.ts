@@ -1,8 +1,12 @@
 import express from "express";
-import { genericRoute } from "@/middlewares/route.middleware";
 import taskControllers from "@/controllers/task.controllers";
+import { genericRoute } from "@/middlewares/route.middleware";
+import {
+    createTaskSchema,
+    moveTaskSchema,
+    updateTaskSchema,
+} from "@/schemas/task.schemas";
 import { validate } from "@/utils/validator";
-import { createTaskSchema } from "@/schemas/task.schemas";
 
 const router = express.Router();
 
@@ -14,8 +18,18 @@ router.post(
     genericRoute(taskControllers.create)
 );
 
-router.put("/:id", genericRoute(taskControllers.update));
+router.put(
+    "/:id",
+    validate(updateTaskSchema),
+    genericRoute(taskControllers.update)
+);
 
-router.delete("/", genericRoute(taskControllers.remove));
+router.delete("/:id", genericRoute(taskControllers.remove));
+
+router.put(
+    "/move",
+    validate(moveTaskSchema),
+    genericRoute(taskControllers.move)
+);
 
 export default router;

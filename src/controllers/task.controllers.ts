@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import type {
     ITaskCreateDTO,
+    ITaskMoveDTO,
     ITaskUpdateDTO,
 } from "@/interfaces/task.interfaces";
 
@@ -82,9 +83,40 @@ const remove = async (req: Request, res: Response) => {
     return res.status(200).send(deletedTask);
 };
 
+const move = async (req: Request, res: Response) => {
+    const { taskId, listId } = res.locals.body as ITaskMoveDTO;
+
+    const updatedTask = await taskServices.update(taskId, { listId });
+
+    if (!updatedTask) {
+        return res.status(400).send("Error updating task");
+    }
+
+    const updatedOldList = await listServices.removeTaskFromList(
+        updatedTask.listId,
+        updatedTask._id
+    );
+
+    if (!updatedOldList) {
+        return res.status(400).send("Error removing task from old list");
+    }
+
+    const updatedNewList = await listServices.addTaskToList(
+        updatedTask.listId,
+        updatedTask._id
+    );
+
+    if (!updatedNewList) {
+        return res.status(400).send("Error adding task to new list");
+    }
+
+    return res.status(200).send(updatedTask);
+};
+
 export default {
     get,
     create,
     update,
     remove,
+    move,
 };

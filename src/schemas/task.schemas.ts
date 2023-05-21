@@ -7,4 +7,16 @@ const createTaskSchema = Joi.object({
     order: Joi.number().required(),
 });
 
-export { createTaskSchema };
+const updateTaskSchema = Joi.object({
+    listId: Joi.string(),
+    description: Joi.string(),
+    dueDate: Joi.date(),
+    order: Joi.number(),
+});
+
+const moveTaskSchema = Joi.object({
+    taskId: Joi.string().required(),
+    listId: Joi.string().required(),
+});
+
+export { createTaskSchema, updateTaskSchema, moveTaskSchema };

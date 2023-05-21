@@ -18,8 +18,12 @@ interface ITaskCreateDTO {
 interface ITaskUpdateDTO {
     description?: string;
     due_date?: Date;
-    listId?: ObjectId;
     order?: number;
 }
 
-export { ITask, ITaskCreateDTO, ITaskUpdateDTO };
+interface ITaskMoveDTO {
+    taskId: ObjectId;
+    listId: ObjectId;
+}
+
+export { ITask, ITaskCreateDTO, ITaskUpdateDTO, ITaskMoveDTO };
