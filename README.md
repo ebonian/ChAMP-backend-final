@@ -12,29 +12,30 @@ There are several data models in the application. Each contains a number of attr
 
 ### Task
 
-- Description (optional)
-- Due date (optional)
-- Order
+-   Description (optional)
+-   Due date (optional)
+-   Order
 
 ### List
 
-- Title
-- Order
+-   Title
+-   Order
 
 A list can contain many tasks, and a task must belong to only one list.
 
 The API should support the following operations:
 
-- Create a task
-- Update a task
-- Delete a task
-- Create a list
-- Update a list
-- Move a task to another list
-- Reorder a task in a list
-- Reorder a list
-- Delete a list, also every tasks in it
-  You can decide what inputs and outputs for the API.
+-   Create a task
+-   Update a task
+-   Delete a task
+-   Create a list
+-   Update a list
+-   Move a task to another list
+-   Reorder a task in a list
+-   Reorder a list
+-   Delete a list, also every tasks in it
+
+You can decide what inputs and outputs for the API.
 
 ## Technical Requirements
 
@@ -42,13 +43,13 @@ You may use any technology stack for implementation, including programming langu
 
 Be aware that we will mainly take into consideration the following evaluation criteria:
 
-- How clean and organized your code is;
-- If you implemented the business requirements correctly;
-- (Optional) How good your automated tests are (qualitative over quantitative).
+-   How clean and organized your code is;
+-   If you implemented the business requirements correctly;
+-   (Optional) How good your automated tests are (qualitative over quantitative).
 
 ## Deliverables
 
 You can submit this assignment by providing a link to any repository of your work from any Git provider, e.g. GitHub, GitLab. The repository should include:
 
-- Your code
-- README.md that instructs how to set up and run the project locally. You should also include external tools that are required to be installed, e.g. Node.
+-   Your code
+-   README.md that instructs how to set up and run the project locally. You should also include external tools that are required to be installed, e.g. Node.
