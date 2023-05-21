@@ -24,4 +24,6 @@ router.put(
 
 router.delete("/:id", genericRoute(listController.remove));
 
+router.put("/reorder", genericRoute(listController.reorder));
+
 export default router;

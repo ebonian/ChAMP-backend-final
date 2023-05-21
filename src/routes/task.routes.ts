@@ -34,4 +34,6 @@ router.put(
     genericRoute(taskControllers.move)
 );
 
+router.put("/reorder", genericRoute(taskControllers.reorder));
+
 export default router;
