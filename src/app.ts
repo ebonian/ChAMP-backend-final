@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import listRoutes from "@/routes/list.routes";
+import taskRoutes from "@/routes/task.routes";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -18,6 +19,7 @@ mongoose
 app.use(bodyParser.json());
 
 app.use("/list", listRoutes);
+app.use("/task", taskRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

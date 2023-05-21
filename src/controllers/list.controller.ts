@@ -5,11 +5,15 @@ import type { Request, Response } from "express";
 const get = async (req: Request, res: Response) => {};
 
 const create = async (req: Request, res: Response) => {
-    const { title, order } = res.locals.body as IListDTO;
+    const listBody = res.locals.body as IListDTO;
 
-    const task = await listServices.create({ title, order });
+    const createdList = await listServices.create(listBody);
 
-    res.status(201).send(task);
+    if (!createdList) {
+        return res.status(400).send();
+    }
+
+    res.status(201).send(createdList);
 };
 
 const update = async (req: Request, res: Response) => {};
