@@ -3,7 +3,15 @@ import type { Request, Response } from "express";
 
 import listServices from "@/services/list.services";
 
-const get = async (req: Request, res: Response) => {};
+const get = async (req: Request, res: Response) => {
+    const lists = await listServices.find();
+
+    if (!lists) {
+        return res.status(404).send();
+    }
+
+    res.status(200).send(lists);
+};
 
 const create = async (req: Request, res: Response) => {
     const listBody = res.locals.body as IListCreateDTO;
