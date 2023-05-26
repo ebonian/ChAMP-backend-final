@@ -1,5 +1,45 @@
 # Career Track: Final Project for Backend
 
+## Getting Started
+
+Run the following command:
+
+### Required tools
+
+1. Nodejs
+2. PNPM
+3. Docker
+
+### Run on the local machine
+
+```sh
+# clone the project to local machine with new folder name
+git clone https://github.com/Ebonian/ChAMP-backend-final.git Poon-ChAMP-Backend
+
+# cd into the project folder
+cd Poon-ChAMP-Backend
+
+# install dependencies
+pnpm i
+```
+
+### Development
+
+```sh
+# run local development server
+pnpm dev
+```
+
+### Build and Serve
+
+```sh
+# build the project to ./dist
+pnpm build
+
+# run the project with nodejs
+pnpm start
+```
+
 ## Introduction
 
 In this assignment, you will be responsible for creating a CRUD application. This application is a Todo application. Because of limited time, this application only has one Kanban board with many lists and tasks.
