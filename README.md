@@ -39,4 +39,6 @@ pnpm build
 pnpm start
 ```
 
-### The API documentation is hosted on [localhost:3000](http://localhost:3000/api-docs)
+The API documentation is hosted on [localhost:3000](http://localhost:3000/api-docs)
+
+Developed by Tanadon Santisan (Poon)
