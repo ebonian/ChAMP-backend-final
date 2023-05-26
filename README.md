@@ -6,9 +6,9 @@ Run the following command:
 
 ### Required tools
 
-1. Nodejs
-2. PNPM
-3. Docker
+1. [NodeJS](https://nodejs.org/en)
+2. [PNpM](https://pnpm.io/)
+3. [Docker](https://www.docker.com/)
 
 ### Run on the local machine
 
