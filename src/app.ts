@@ -1,6 +1,9 @@
 import bodyParser from "body-parser";
 import express from "express";
 import mongoose from "mongoose";
+import swaggerUi from "swagger-ui-express";
+
+import swaggerDocument from "@/docs/swagger.json";
 import listRoutes from "@/routes/list.routes";
 import taskRoutes from "@/routes/task.routes";
 
@@ -15,6 +18,8 @@ mongoose
     .catch((err) => {
         console.log(err);
     });
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(bodyParser.json());
 

@@ -1,0 +1,527 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Career Track: Final Project for Backend",
+        "version": "1.0.0",
+        "description": "Todo CRUD application of ChAMP Career Track Final Project for Backend",
+        "contact": {
+            "name": "Tanadon Santisan"
+        }
+    },
+    "host": "localhost:3000",
+    "definitions": {
+        "Task": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "listId": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "dueDate": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "integer"
+                },
+                "__v": {
+                    "type": "integer"
+                }
+            },
+            "example": {
+                "_id": "646a5543f27ef1fab0ff6216",
+                "listId": "646a3faeed93a7df7d2c40fa",
+                "description": "Documenting ChAMP Career Track Final Project for Backend w/ Swagger",
+                "dueDate": "2023-01-01T00:00:00.000Z",
+                "order": 1,
+                "__v": 0
+            }
+        },
+        "CreateTask": {
+            "type": "object",
+            "required": ["listId", "description", "dueDate"],
+            "properties": {
+                "listId": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "dueDate": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "listId": "646a3faeed93a7df7d2c40fa",
+                "description": "Documenting ChAMP Career Track Final Project for Backend w/ Swagger",
+                "dueDate": "2023-01-01T00:00:00.000Z",
+                "order": "1"
+            }
+        },
+        "UpdateTask": {
+            "type": "object",
+            "properties": {
+                "listId": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "dueDate": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "listId": "646a3faeed93a7df7d2c40fa",
+                "description": "Documenting ChAMP Career Track Final Project for Backend w/ Swagger",
+                "dueDate": "2023-01-01T00:00:00.000Z",
+                "order": "1"
+            }
+        },
+        "MoveTask": {
+            "type": "object",
+            "properties": {
+                "taskId": {
+                    "type": "string"
+                },
+                "listId": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "taskId": "646a5543f27ef1fab0ff6216",
+                "listId": "646a3faeed93a7df7d2c40fa"
+            }
+        },
+        "List": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "integer"
+                },
+                "tasks": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "__v": {
+                    "type": "integer"
+                }
+            },
+            "example": {
+                "_id": "5a1e1b5b1c9d440000a7d6b0",
+                "title": "My Todo",
+                "order": 1,
+                "tasks": [
+                    "5a1e1b5b1c9d440000a7d6b1",
+                    "5a1e1b5b1c9d440000a7d6b2"
+                ],
+                "__v": 0
+            }
+        },
+        "CreateList": {
+            "type": "object",
+            "required": ["title"],
+            "properties": {
+                "title": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "title": "Todo"
+            }
+        },
+        "UpdateList": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "title": "Todo"
+            }
+        },
+        "Reorder": {
+            "type": "object",
+            "required": ["order"],
+            "properties": {
+                "order": {
+                    "type": "integer"
+                }
+            },
+            "example": {
+                "order": 1
+            }
+        }
+    },
+    "paths": {
+        "/list": {
+            "get": {
+                "summary": "Get all lists",
+                "tags": ["List"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/List"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a list",
+                "tags": ["List"],
+                "parameters": [
+                    {
+                        "name": "list",
+                        "in": "body",
+                        "description": "List Create Body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateList"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/List"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/list/{listId}": {
+            "get": {
+                "summary": "Get list by id",
+                "tags": ["List"],
+                "parameters": [
+                    {
+                        "name": "listId",
+                        "in": "path",
+                        "description": "List id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/List"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update list by id",
+                "tags": ["List"],
+                "parameters": [
+                    {
+                        "name": "listId",
+                        "in": "path",
+                        "description": "List id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/List"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete list by id",
+                "tags": ["List"],
+                "parameters": [
+                    {
+                        "name": "listId",
+                        "in": "path",
+                        "description": "List id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/List"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/list/{listId}/reorder": {
+            "put": {
+                "summary": "Reorder list by id",
+                "tags": ["List"],
+                "parameters": [
+                    {
+                        "name": "listId",
+                        "in": "path",
+                        "description": "List id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "order",
+                        "in": "body",
+                        "description": "List order",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Reorder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/List"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/task": {
+            "get": {
+                "summary": "Get all tasks",
+                "tags": ["Task"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Task"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a task",
+                "tags": ["Task"],
+                "parameters": [
+                    {
+                        "name": "task",
+                        "in": "body",
+                        "description": "Task Create Body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateTask"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/task/move": {
+            "put": {
+                "summary": "Move a task to another list",
+                "tags": ["Task"],
+                "parameters": [
+                    {
+                        "name": "task",
+                        "in": "body",
+                        "description": "Task Move Body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MoveTask"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/task/{taskId}": {
+            "get": {
+                "summary": "Get task by id",
+                "tags": ["Task"],
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update task by id",
+                "tags": ["Task"],
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete task by id",
+                "tags": ["Task"],
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/task/{taskId}/reorder": {
+            "put": {
+                "summary": "Reorder task by id",
+                "tags": ["Task"],
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "order",
+                        "in": "body",
+                        "description": "Task order",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Reorder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -5,9 +5,9 @@ const createListSchema = Joi.object({
     order: Joi.number().required(),
 });
 
-const updatedListSchema = Joi.object({
+const updateListSchema = Joi.object({
     title: Joi.string(),
     order: Joi.number(),
 });
 
-export { createListSchema, updatedListSchema };
+export { createListSchema, updateListSchema };

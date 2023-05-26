@@ -3,21 +3,21 @@ import type { Document, ObjectId } from "mongoose";
 interface ITask extends Document {
     _id: ObjectId;
     description: string;
-    due_date: Date;
+    dueDate: Date;
     listId: string;
     order: number;
 }
 
 interface ITaskCreateDTO {
     description: string;
-    due_date: Date;
+    dueDate: Date;
     listId: ObjectId;
     order: number;
 }
 
 interface ITaskUpdateDTO {
     description?: string;
-    due_date?: Date;
+    dueDate?: Date;
     order?: number;
 }
 

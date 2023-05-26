@@ -31,12 +31,12 @@ const getById = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
-    const { description, due_date, listId, order } = res.locals
+    const { description, dueDate, listId, order } = res.locals
         .body as ITaskCreateDTO;
 
     const createdTask = await taskServices.create({
         description,
-        due_date,
+        dueDate,
         listId,
         order,
     });
