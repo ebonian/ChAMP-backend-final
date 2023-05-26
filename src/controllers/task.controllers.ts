@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import type {
     ITaskCreateDTO,
     ITaskMoveDTO,
+    ITaskReorderDTO,
     ITaskUpdateDTO,
 } from "@/interfaces/task.interfaces";
 
@@ -31,14 +32,15 @@ const getById = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
-    const { description, dueDate, listId, order } = res.locals
-        .body as ITaskCreateDTO;
+    const { description, dueDate, listId } = res.locals.body as ITaskCreateDTO;
+
+    const tasks = await taskServices.find();
 
     const createdTask = await taskServices.create({
         description,
         dueDate,
         listId,
-        order,
+        order: tasks ? tasks.length + 1 : 1,
     });
 
     if (!createdTask) {
@@ -129,7 +131,18 @@ const move = async (req: Request, res: Response) => {
     return res.status(200).send(updatedTask);
 };
 
-const reorder = async (req: Request, res: Response) => {};
+const reorder = async (req: Request, res: Response) => {
+    const taskId = req.params.id;
+    const taskReorderBody = res.locals.body as ITaskReorderDTO;
+
+    const updatedTask = await taskServices.update(taskId, taskReorderBody);
+
+    if (!updatedTask) {
+        return res.status(400).send("Error reordering task");
+    }
+
+    return res.status(200).send(updatedTask);
+};
 
 export default {
     get,

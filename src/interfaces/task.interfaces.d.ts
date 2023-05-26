@@ -12,7 +12,7 @@ interface ITaskCreateDTO {
     description: string;
     dueDate: Date;
     listId: ObjectId;
-    order: number;
+    order?: number;
 }
 
 interface ITaskUpdateDTO {
@@ -26,4 +26,8 @@ interface ITaskMoveDTO {
     listId: ObjectId;
 }
 
-export { ITask, ITaskCreateDTO, ITaskUpdateDTO, ITaskMoveDTO };
+interface ITaskReorderDTO {
+    order: number;
+}
+
+export { ITask, ITaskCreateDTO, ITaskUpdateDTO, ITaskMoveDTO, ITaskReorderDTO };

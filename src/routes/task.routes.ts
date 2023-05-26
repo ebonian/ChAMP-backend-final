@@ -4,6 +4,7 @@ import { genericRoute } from "@/middlewares/route.middleware";
 import {
     createTaskSchema,
     moveTaskSchema,
+    reorderTaskSchema,
     updateTaskSchema,
 } from "@/schemas/task.schemas";
 import { validate } from "@/utils/validator";
@@ -34,6 +35,10 @@ router.put(
     genericRoute(taskControllers.move)
 );
 
-router.put("/reorder", genericRoute(taskControllers.reorder));
+router.put(
+    "/reorder",
+    validate(reorderTaskSchema),
+    genericRoute(taskControllers.reorder)
+);
 
 export default router;

@@ -17,4 +17,8 @@ interface IListUpdateDTO {
     order?: number;
 }
 
-export { IList, IListCreateDTO, IListUpdateDTO };
+interface IListReorderDTO {
+    order: number;
+}
+
+export { IList, IListCreateDTO, IListUpdateDTO, IListReorderDTO };

@@ -2,7 +2,11 @@ import express from "express";
 import listController from "@/controllers/list.controller";
 import { genericRoute } from "@/middlewares/route.middleware";
 import { validate } from "@/utils/validator";
-import { createListSchema, updateListSchema } from "@/schemas/list.schemas";
+import {
+    createListSchema,
+    reorderListSchema,
+    updateListSchema,
+} from "@/schemas/list.schemas";
 
 const router = express.Router();
 
@@ -24,6 +28,10 @@ router.put(
 
 router.delete("/:id", genericRoute(listController.remove));
 
-router.put("/reorder", genericRoute(listController.reorder));
+router.put(
+    "/reorder",
+    validate(reorderListSchema),
+    genericRoute(listController.reorder)
+);
 
 export default router;

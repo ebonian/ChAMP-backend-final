@@ -4,14 +4,14 @@ const createTaskSchema = Joi.object({
     listId: Joi.string().required(),
     description: Joi.string().required(),
     dueDate: Joi.date().required(),
-    order: Joi.number().required(),
+    // order: Joi.number().required(),
 });
 
 const updateTaskSchema = Joi.object({
     listId: Joi.string(),
     description: Joi.string(),
     dueDate: Joi.date(),
-    order: Joi.number(),
+    // order: Joi.number(),
 });
 
 const moveTaskSchema = Joi.object({
@@ -19,4 +19,13 @@ const moveTaskSchema = Joi.object({
     listId: Joi.string().required(),
 });
 
-export { createTaskSchema, updateTaskSchema, moveTaskSchema };
+const reorderTaskSchema = Joi.object({
+    order: Joi.number().required(),
+});
+
+export {
+    createTaskSchema,
+    updateTaskSchema,
+    moveTaskSchema,
+    reorderTaskSchema,
+};

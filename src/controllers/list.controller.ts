@@ -1,4 +1,7 @@
-import type { IListCreateDTO } from "@/interfaces/list.interfaces";
+import type {
+    IListCreateDTO,
+    IListReorderDTO,
+} from "@/interfaces/list.interfaces";
 import type { Request, Response } from "express";
 
 import listServices from "@/services/list.services";
@@ -73,7 +76,18 @@ const remove = async (req: Request, res: Response) => {
     return res.status(200).send(removedList);
 };
 
-const reorder = async (req: Request, res: Response) => {};
+const reorder = async (req: Request, res: Response) => {
+    const listId = req.params.id;
+    const listReorderBody = res.locals.body as IListReorderDTO;
+
+    const updatedList = await listServices.update(listId, listReorderBody);
+
+    if (!updatedList) {
+        return res.status(400).send("Error reordering list");
+    }
+
+    return res.status(200).send(updatedList);
+};
 
 export default {
     get,

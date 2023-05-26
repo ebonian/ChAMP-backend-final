@@ -1,5 +1,9 @@
 import type { ObjectId } from "mongoose";
-import type { IList, IListCreateDTO } from "@/interfaces/list.interfaces";
+import type {
+    IList,
+    IListCreateDTO,
+    IListUpdateDTO,
+} from "@/interfaces/list.interfaces";
 
 import ListModel from "@/models/list.model";
 
@@ -27,7 +31,7 @@ const create = async (list: IListCreateDTO) => {
     return newList;
 };
 
-const update = async (listId: ObjectId | string, list: IListCreateDTO) => {
+const update = async (listId: ObjectId | string, list: IListUpdateDTO) => {
     const updatedList = await ListModel.findByIdAndUpdate(listId, list, {
         new: true,
     })
