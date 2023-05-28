@@ -9,7 +9,8 @@ interface IList extends Document {
 
 interface IListCreateDTO {
     title: string;
-    order: number;
+    order?: number;
+    tasks?: ObjectId[];
 }
 
 interface IListUpdateDTO {

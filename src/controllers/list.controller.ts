@@ -30,9 +30,15 @@ const getById = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
-    const listBody = res.locals.body as IListCreateDTO;
+    const { title } = res.locals.body as IListCreateDTO;
 
-    const createdList = await listServices.create(listBody);
+    const lists = await listServices.find();
+
+    const createdList = await listServices.create({
+        title,
+        order: lists ? lists.length + 1 : 1,
+        tasks: [],
+    });
 
     if (!createdList) {
         return res.status(400).send("Error creating list");
