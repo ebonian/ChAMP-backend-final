@@ -22,6 +22,14 @@ const findById = async (taskId: ObjectId | string) => {
     return task;
 };
 
+const findByListId = async (listId: ObjectId | string) => {
+    const tasks = await TaskModel.find({ listId })
+        .then((tasks) => tasks)
+        .catch(() => null);
+
+    return tasks;
+};
+
 const create = async (task: ITaskCreateDTO) => {
     const createdTask = await TaskModel.create(task)
         .then((task) => task)
@@ -56,6 +64,7 @@ const remove = async (taskId: ObjectId | string) => {
 export default {
     find,
     findById,
+    findByListId,
     create,
     update,
     remove,

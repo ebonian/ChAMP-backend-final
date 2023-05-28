@@ -34,7 +34,7 @@ const getById = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
     const { description, dueDate, listId } = res.locals.body as ITaskCreateDTO;
 
-    const tasks = await taskServices.find();
+    const tasks = await taskServices.findByListId(listId);
 
     const createdTask = await taskServices.create({
         description,
