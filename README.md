@@ -7,7 +7,7 @@ Todo application for `ChAMP Career Track: Final Project for Backend` with functi
 ### Required tools
 
 1. [NodeJS](https://nodejs.org/en)
-2. [PNpM](https://pnpm.io/)
+2. [PNPM](https://pnpm.io/)
 3. [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
 
 ### Install on the local machine
